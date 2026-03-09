@@ -9,7 +9,7 @@
 ## 🙋‍♂️ About Me
 
 - 🏫 200-level IT student at Babcock University, Ilishan-Remo, Nigeria
-- 🌍 Seeking a 6-month paid IT Support internship in Europe (Sweden 🇸🇪 | Germany 🇩🇪 | Denmark 🇩🇰 | Netherlands 🇳🇱)
+- 🌍 Seeking a 6-month paid IT Support internship in Europe (Sweden 🇸🇪 | Germany 🇩🇪 | Denmark 🇩🇰 )
 - 🐍 Currently building my Python skills and web development knowledge
 - 📚 Completing Google IT Support Professional Certificate (In Progress)
 - 🌱 Learning: Networking, Cloud Computing, IT Infrastructure
