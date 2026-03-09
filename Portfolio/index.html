@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giovani Mbonu — IT Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0a0a0a;
+  --white: #f5f2ee;
+  --red: #c0392b;
+  --red-light: #e74c3c;
+  --gold: #d4a843;
+  --gray: #888;
+  --card-bg: #111;
+  --border: #222;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 4rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  right: -2rem;
+  transform: translateY(-50%);
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(8rem, 18vw, 22rem);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(192,57,43,0.12);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.hero-content { max-width: 780px; position: relative; z-index: 1; }
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(192,57,43,0.12);
+  border: 1px solid rgba(192,57,43,0.3);
+  color: var(--red-light);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--red-light);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+h1 .name-first { display: block; }
+h1 .name-last { display: block; color: var(--red); }
+
+.hero-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #aaa;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.btn-primary {
+  background: var(--red);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--red-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(192,57,43,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--gray);
+  transform: translateY(-2px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--gray);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: fadeUp 0.6s 0.5s ease both;
+}
+
+.hero-scroll::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--gray);
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 6rem 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-text p {
+  color: #aaa;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+}
+
+.about-text p strong { color: var(--white); font-weight: 500; }
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.stat-card:hover { border-color: var(--red); }
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── SKILLS ── */
+#skills { background: #0d0d0d; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-category {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.8rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.skill-category:hover {
+  border-color: rgba(192,57,43,0.4);
+  transform: translateY(-3px);
+}
+
+.skill-cat-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.skill-cat-icon {
+  width: 28px; height: 28px;
+  background: rgba(192,57,43,0.15);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: #bbb;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2rem;
+  transition: all 0.2s;
+}
+
+.skill-tag:hover {
+  background: rgba(192,57,43,0.1);
+  border-color: rgba(192,57,43,0.4);
+  color: var(--white);
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.project-card:hover {
+  border-color: rgba(192,57,43,0.3);
+  transform: translateY(-4px);
+}
+
+.project-card:hover::before { opacity: 1; }
+
+.project-type {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.stack-tag {
+  background: rgba(255,255,255,0.05);
+  color: #aaa;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.2rem;
+  font-family: monospace;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--red-light);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: gap 0.2s;
+  margin-top: auto;
+}
+
+.project-link:hover { gap: 0.7rem; }
+
+/* ── CERTIFICATIONS ── */
+#certifications { background: #0d0d0d; }
+
+.certs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cert-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: border-color 0.2s;
+}
+
+.cert-item:hover { border-color: rgba(192,57,43,0.3); }
+
+.cert-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.cert-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.cert-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+
+.cert-issuer {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.cert-badge {
+  font-size: 0.72rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.badge-progress {
+  background: rgba(212,168,67,0.12);
+  border: 1px solid rgba(212,168,67,0.3);
+  color: var(--gold);
+}
+
+.badge-planned {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--gray);
+}
+
+/* ── AVAILABILITY ── */
+.avail-banner {
+  background: linear-gradient(135deg, rgba(192,57,43,0.15), rgba(192,57,43,0.05));
+  border: 1px solid rgba(192,57,43,0.25);
+  border-radius: 0.75rem;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.avail-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.avail-desc {
+  color: #aaa;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.avail-flags {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.flag-chip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  color: #ccc;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 2rem;
+}
+
+/* ── CONTACT ── */
+#contact { background: #0d0d0d; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-intro {
+  color: #aaa;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #ccc;
+  text-decoration: none;
+  padding: 1rem 1.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  transition: all 0.2s;
+}
+
+.contact-link:hover {
+  border-color: rgba(192,57,43,0.4);
+  color: var(--white);
+  transform: translateX(4px);
+}
+
+.contact-link-icon {
+  width: 36px; height: 36px;
+  background: rgba(192,57,43,0.12);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-link-label { font-size: 0.78rem; color: var(--gray); margin-bottom: 0.1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.contact-link-value { font-size: 0.9rem; font-weight: 500; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--gray);
+  font-size: 0.82rem;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .hero-scroll { left: 1.5rem; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .avail-banner { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+    <a href="#" class="nav-logo">GM<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:mbonuchimkasidimma@gmail.com" class="btn btn-primary" style="padding:0.6rem 1.4rem;font-size:0.82rem;">Hire Me</a>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+    <div class="hero-bg-text">IT</div>
+    <div class="hero-content">
+      <div class="hero-tag">Available — January 2027</div>
+      <h1>
+        <span class="name-first">Giovani</span>
+        <span class="name-last">Mbonu.</span>
+      </h1>
+      <p class="hero-desc">
+        Information Technology student at Babcock University, Nigeria. Building a career in IT Support & Systems — targeting internships across Europe in 2027.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="https://github.com/giovani-mbonu" target="_blank" class="btn btn-outline">GitHub ↗</a>
+        <a href="https://linkedin.com/in/giovani-mbonu" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll to explore</div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <p class="section-label reveal">About Me</p>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-title">Passionate about<br/>technology &amp; people.</h2>
+        <p>I'm a <strong>200-level IT student</strong> at Babcock University, Nigeria, with a strong foundation in Python, web development, and systems support. I'm driven by a goal to work internationally and build a world-class IT career.</p>
+        <p>I am actively preparing for a <strong>6-month paid IT Support internship in Europe</strong>, starting January 2027, targeting companies in Sweden, Germany and Denmark.</p>
+        <p>When I'm not studying, I'm learning cloud computing, practising German, and building projects to sharpen my technical skills.</p>
+        <div style="margin-top:2rem;">
+          <a href="#contact" class="btn btn-primary">Get in Touch →</a>
+        </div>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="stat-num">200</div>
+          <div class="stat-label">Level — Babcock University</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Countries Targeted</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">90+</div>
+          <div class="stat-label">Companies to Apply To</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Jan<br/><span style="font-size:1.2rem">2027</span></div>
+          <div class="stat-label">Internship Start Date</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- SKILLS -->
+
+  <section id="skills">
+    <p class="section-label reveal">Technical Skills</p>
+    <h2 class="section-title reveal">What I work with.</h2>
+    <div class="skills-grid">
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">
+          <div class="skill-cat-icon">🐍</div>
+          Programming
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">Algorithms</span>
+          <span class="skill-tag">Problem Solving</span>
+        </div>
+      </div>
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">
+          <div class="skill-cat-icon">🖥️</div>
+          IT Support & Systems
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Windows OS</span>
+          <span class="skill-tag">Hardware Troubleshooting</span>
+          <span class="skill-tag">Networking Basics</span>
+          <span class="skill-tag">Technical Support</span>
+        </div>
+      </div>
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">
+          <div class="skill-cat-icon">🛠️</div>
+          Tools & Platforms
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Microsoft Office</span>
+          <span class="skill-tag">Linux (Learning)</span>
+        </div>
+      </div>
+      <div class="skill-category reveal">
+        <div class="skill-cat-title">
+          <div class="skill-cat-icon">🌍</div>
+          Languages
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">English — Fluent</span>
+          <span class="skill-tag">Igbo — Native</span>
+          <span class="skill-tag">German — Beginner</span>
+          <span class="skill-tag">Swedish — Beginner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- PROJECTS -->
+
+  <section id="projects">
+    <p class="section-label reveal">Projects</p>
+    <h2 class="section-title reveal">Things I've built.</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-type">Web Development</div>
+        <div class="project-title">Personal Portfolio Website</div>
+        <p class="project-desc">A responsive personal portfolio website designed and developed from scratch to showcase my skills, projects and background to potential employers and collaborators.</p>
+        <div class="project-stack">
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">Git</span>
+          <span class="stack-tag">Responsive Design</span>
+        </div>
+        <a href="https://github.com/giovani-mbonu/portfolio-website" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-type">Python / University</div>
+        <div class="project-title">Python Programming Assignment</div>
+        <p class="project-desc">A Python program developed as part of university coursework, demonstrating core programming concepts including logical thinking, algorithms, and clean code structure.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Algorithms</span>
+          <span class="stack-tag">Problem Solving</span>
+        </div>
+        <a href="https://github.com/giovani-mbonu/python-assignment" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- CERTIFICATIONS -->
+
+  <section id="certifications">
+    <p class="section-label reveal">Certifications</p>
+    <h2 class="section-title reveal">Always learning.</h2>
+    <div class="certs-list">
+      <div class="cert-item reveal">
+        <div class="cert-left">
+          <div class="cert-icon" style="background:rgba(66,133,244,0.12);">🎓</div>
+          <div>
+            <div class="cert-name">Fundamentals Of digital marketing Certificate</div>
+            <div class="cert-issuer">Google / Google Garage</div>
+          </div>
+        </div>
+        <span class="cert-badge badge-progress">In Progress</span>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-left">
+          <div class="cert-icon" style="background:rgba(0,103,198,0.12);">💼</div>
+          <div>
+            <div class="cert-name">IBM IT Fundamentals</div>
+            <div class="cert-issuer">IBM SkillsBuild</div>
+          </div>
+        </div>
+        <span class="cert-badge badge-progress">In Progress</span>
+      </div>
+      <div class="cert-item reveal">
+        <div class="cert-left">
+          <div class="cert-icon" style="background:rgba(40,167,69,0.12);">📋</div>
+          <div>
+            <div class="cert-name">Working as an IT Support Technician</div>
+            <div class="cert-issuer">Alison</div>
+          </div>
+        </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- AVAILABILITY -->
+
+  <section id="availability">
+    <div class="avail-banner reveal">
+      <div>
+        <p class="section-label" style="margin-bottom:0.6rem;">Internship Availability</p>
+        <h3 class="avail-title">Open to opportunities<br/>across Europe — Jan 2027.</h3>
+        <p class="avail-desc">I am actively seeking a 6-month paid IT Support or Systems internship starting January 2027. I am available for full-time placement and ready to relocate.</p>
+        <div class="avail-flags">
+          <span class="flag-chip">🇸🇪 Sweden</span>
+          <span class="flag-chip">🇩🇪 Germany</span>
+          <span class="flag-chip">🇩🇰 Denmark</span>
+          <span class="flag-chip">📅 6 Months</span>
+          <span class="flag-chip">⏰ Full-Time</span>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary" style="white-space:nowrap;">Contact Me →</a>
+    </div>
+  </section>
+
+  <hr class="section-divider"/>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+    <p class="section-label reveal">Contact</p>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h2 class="section-title">Let's connect.</h2>
+        <p class="contact-intro">I'm always open to discussing internship opportunities, collaborations or just connecting with fellow tech enthusiasts. Reach out through any of the channels below.</p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="https://linkedin.com/in/giovani-mbonu" target="_blank" class="contact-link">
+          <div class="contact-link-icon">💼</div>
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-value">linkedin.com/in/giovani-mbonu</div>
+          </div>
+        </a>
+        <a href="https://github.com/giovani-mbonu" target="_blank" class="contact-link">
+          <div class="contact-link-icon">🐙</div>
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-value">github.com/giovani-mbonu</div>
+          </div>
+        </a>
+        <a href="mailto:giovani@example.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">mbonuchimkasidimma@gmail.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <span>© 2026 Mbonu Chimkasidimma Giovani</span>
+    <span>Built with HTML & CSS · Hosted on GitHub Pages</span>
+  </footer>
+
+  <!-- SCROLL REVEAL -->
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
