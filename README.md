@@ -14,7 +14,7 @@
 - 📚 Completing Google IT Support Professional Certificate (In Progress)
 - 🌱 Learning: Networking, Cloud Computing, IT Infrastructure
 - 🗣️ Languages: English (Fluent) | Igbo (Native) | German & Swedish (Beginner)
-- 📫 Reach me: [LinkedIn](https://linkedin.com/in/giovani-mbonu)
+- 📫 Reach me: [LinkedIn](https://linkedin.com/in/chimkasidimma-mbonu)
 
 -----
 
@@ -79,7 +79,7 @@
 
 ## 📬 Connect With Me
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/giovani-mbonu)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/chimkasidimma-mbonu)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/giovani-mbonu)
 
 -----
